@@ -45,6 +45,11 @@ Examples:
 11. Use `npx newman run nameOfYourCollection.json`
 It will run your test using newman
 
+###  How to run portman
+11. In our case u should have yaml file in your project in our case its `petstore.yaml` then
+Use `npx @apideck/portman -l petstore.yaml`
+It will automatically generate all tests from yaml file which you can import into postman
+
 You can use another API to perform  your testing instead of local store API and `store.collection.json`. 
 - <a href="https://github.com/public-apis/public-apis"> Public API list </a>
 
