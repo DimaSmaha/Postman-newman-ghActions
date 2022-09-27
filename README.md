@@ -42,7 +42,7 @@ Examples:
 10. Check github actions for result.
 
 ###  How to run newman
-11. Use npx newman run nameOfYourCollection.json
+11. Use `npx newman run nameOfYourCollection.json`
 It will run your test using newman
 
 You can use another API to perform  your testing instead of local store API and `store.collection.json`. 
