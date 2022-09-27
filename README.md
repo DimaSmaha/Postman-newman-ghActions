@@ -41,6 +41,9 @@ Examples:
 9. Add Github action to run `petstore.collection.json` in Github pages by <a href="https://www.linkedin.com/pulse/running-postman-collections-via-github-action-nirmala-jayasanka"> article </a> or use another GH action.
 10. Check github actions for result.
 
+###  How to run newman
+11. Use npx newman run nameOfYourCollection.json
+It will run your test using newman
 
 You can use another API to perform  your testing instead of local store API and `store.collection.json`. 
 - <a href="https://github.com/public-apis/public-apis"> Public API list </a>
