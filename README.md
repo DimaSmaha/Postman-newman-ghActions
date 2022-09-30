@@ -50,6 +50,10 @@ It will run your test using newman
  Use `npx @apideck/portman -l petstore.yaml`.
  It will automatically generate all tests from yaml file which you can import into postman.
 
+###  How to run prism
+11. Use `npx prism mpck nameOfYourCollection.json/.yaml`
+It will run mock server based on your json or yaml file of your api. You can easily use it to make requests to it
+
 You can use another API to perform  your testing instead of local store API and `store.collection.json`. 
 - <a href="https://github.com/public-apis/public-apis"> Public API list </a>
 
