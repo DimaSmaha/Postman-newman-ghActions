@@ -1,0 +1,1078 @@
+openapi: 3.0.0
+info:
+  title: reqres
+  contact: {}
+  version: '1.0'
+servers:
+- url: https://reqres.in/api
+  variables: {}
+paths:
+  /users/:
+    get:
+      tags:
+      - Misc
+      summary: Get list of users
+      operationId: Getlistofusers
+      parameters:
+      - name: page
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 2
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Thu, 29 Sep 2022 09:35:05 GMT
+            Transfer-Encoding:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: chunked
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '*'
+            Etag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"406-ut0vzoCuidvyMf8arZpMpJ6ZRDw"
+            Via:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1.1 vegur
+            Cache-Control:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: max-age=14400
+            CF-Cache-Status:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: MISS
+            Report-To:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    endpoints:
+                    - url: https://a.nel.cloudflare.com/report/v3?s=BXKkKxI6lAGc3SgdFOXJxnB36cHjxvDfJc2XlF6PSF%2FUZ18tds8ed7y9q3NoaEsW2efnuSP1VMWZ23lfIoZyQcF93fUrfJJLYyrrshFLFTxCjKIHrwwU%2BJWYWA%3D%3D
+                    group: cf-nel
+                    max_age: 604800
+            NEL:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    success_fraction: 0
+                    report_to: cf-nel
+                    max_age: 604800
+            Vary:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Accept-Encoding
+            Server:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: cloudflare
+            CF-RAY:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 7523ba0b0c7024b0-KBP
+            Content-Encoding:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: br
+          content:
+            application/json; charset=utf-8:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Getlistofusers'
+                - example:
+                    page: 2
+                    per_page: 6
+                    total: 12
+                    total_pages: 2
+                    data:
+                    - id: 7
+                      email: michael.lawson@reqres.in
+                      first_name: Michael
+                      last_name: Lawson
+                      avatar: https://reqres.in/img/faces/7-image.jpg
+                    - id: 8
+                      email: lindsay.ferguson@reqres.in
+                      first_name: Lindsay
+                      last_name: Ferguson
+                      avatar: https://reqres.in/img/faces/8-image.jpg
+                    - id: 9
+                      email: tobias.funke@reqres.in
+                      first_name: Tobias
+                      last_name: Funke
+                      avatar: https://reqres.in/img/faces/9-image.jpg
+                    - id: 10
+                      email: byron.fields@reqres.in
+                      first_name: Byron
+                      last_name: Fields
+                      avatar: https://reqres.in/img/faces/10-image.jpg
+                    - id: 11
+                      email: george.edwards@reqres.in
+                      first_name: George
+                      last_name: Edwards
+                      avatar: https://reqres.in/img/faces/11-image.jpg
+                    - id: 12
+                      email: rachel.howell@reqres.in
+                      first_name: Rachel
+                      last_name: Howell
+                      avatar: https://reqres.in/img/faces/12-image.jpg
+                    support:
+                      url: https://reqres.in/#support-heading
+                      text: To keep ReqRes free, contributions towards server costs are appreciated!
+              example:
+                page: 2
+                per_page: 6
+                total: 12
+                total_pages: 2
+                data:
+                - id: 7
+                  email: michael.lawson@reqres.in
+                  first_name: Michael
+                  last_name: Lawson
+                  avatar: https://reqres.in/img/faces/7-image.jpg
+                - id: 8
+                  email: lindsay.ferguson@reqres.in
+                  first_name: Lindsay
+                  last_name: Ferguson
+                  avatar: https://reqres.in/img/faces/8-image.jpg
+                - id: 9
+                  email: tobias.funke@reqres.in
+                  first_name: Tobias
+                  last_name: Funke
+                  avatar: https://reqres.in/img/faces/9-image.jpg
+                - id: 10
+                  email: byron.fields@reqres.in
+                  first_name: Byron
+                  last_name: Fields
+                  avatar: https://reqres.in/img/faces/10-image.jpg
+                - id: 11
+                  email: george.edwards@reqres.in
+                  first_name: George
+                  last_name: Edwards
+                  avatar: https://reqres.in/img/faces/11-image.jpg
+                - id: 12
+                  email: rachel.howell@reqres.in
+                  first_name: Rachel
+                  last_name: Howell
+                  avatar: https://reqres.in/img/faces/12-image.jpg
+                support:
+                  url: https://reqres.in/#support-heading
+                  text: To keep ReqRes free, contributions towards server costs are appreciated!
+      deprecated: false
+    post:
+      tags:
+      - Misc
+      summary: Create user
+      operationId: Createuser
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/CreateuserRequest'
+              - example:
+                  name: ''
+                  job: ''
+            example:
+              name: ''
+              job: ''
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Thu, 29 Sep 2022 09:35:50 GMT
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '79'
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '*'
+            Etag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"4f-YAqky0i3RmYr2sYCqf/MSsxWVtQ"
+            Via:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1.1 vegur
+            CF-Cache-Status:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: DYNAMIC
+            Report-To:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    endpoints:
+                    - url: https://a.nel.cloudflare.com/report/v3?s=%2FbALHSH4D5b%2FHrLqeV1KUo%2FAFWVoe6Ljwv2mg3h7uh4tbfp%2B3ehfL%2FG4K1kZOLcP%2BepsO3rtJsfdj0v107i2X1p%2FNpFqKrPJJL9Q%2BOE5JLG7bN9wq22T6lPoRQ%3D%3D
+                    group: cf-nel
+                    max_age: 604800
+            NEL:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    success_fraction: 0
+                    report_to: cf-nel
+                    max_age: 604800
+            Server:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: cloudflare
+            CF-RAY:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 7523bb264e6924b0-KBP
+          content:
+            application/json; charset=utf-8:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Createuser'
+                - example:
+                    name: Valdirr
+                    job: QA
+                    id: '889'
+                    createdAt: 2022-09-29T09:35:50.850Z
+              example:
+                name: Valdirr
+                job: QA
+                id: '889'
+                createdAt: 2022-09-29T09:35:50.850Z
+      deprecated: false
+    put:
+      tags:
+      - Misc
+      summary: Update user
+      operationId: Updateuser
+      parameters:
+      - name: searchId
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 6
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateuserRequest'
+              - example:
+                  name: ''
+                  job: ''
+            example:
+              name: ''
+              job: ''
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    patch:
+      tags:
+      - Misc
+      summary: Update user by patch
+      operationId: Updateuserbypatch
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/UpdateuserbypatchRequest'
+              - example:
+                  name: ''
+                  job: ''
+            example:
+              name: ''
+              job: ''
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+    delete:
+      tags:
+      - Misc
+      summary: Delete user
+      operationId: Deleteuser
+      parameters:
+      - name: searchId
+        in: query
+        description: ''
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+          example: 5
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/6:
+    get:
+      tags:
+      - Misc
+      summary: Get singlle user
+      operationId: Getsinglleuser
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          headers:
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Thu, 29 Sep 2022 09:35:17 GMT
+            Transfer-Encoding:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: chunked
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '*'
+            Etag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"118-we7xcJocGnljhK3IAnwbs1F3VcQ"
+            Via:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1.1 vegur
+            Cache-Control:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: max-age=14400
+            CF-Cache-Status:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: REVALIDATED
+            Report-To:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    endpoints:
+                    - url: https://a.nel.cloudflare.com/report/v3?s=jFdGovnDvuNVw6dPQu0C7s5iQlajTmnmjEmOoGoxCWSuBE3XOe6wtlh%2BQ9PjseEXy2ChE1%2FbQ3I7vmsJLNmrH1gyAZxQqyB5vqdaK1Xu5is3ygMdaKBHDL4lEw%3D%3D
+                    group: cf-nel
+                    max_age: 604800
+            NEL:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    success_fraction: 0
+                    report_to: cf-nel
+                    max_age: 604800
+            Vary:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Accept-Encoding
+            Server:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: cloudflare
+            CF-RAY:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 7523ba53ff8024b0-KBP
+            Content-Encoding:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: br
+          content:
+            application/json; charset=utf-8:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/Getsinglleuser'
+                - example:
+                    data:
+                      id: 6
+                      email: tracey.ramos@reqres.in
+                      first_name: Tracey
+                      last_name: Ramos
+                      avatar: https://reqres.in/img/faces/6-image.jpg
+                    support:
+                      url: https://reqres.in/#support-heading
+                      text: To keep ReqRes free, contributions towards server costs are appreciated!
+              example:
+                data:
+                  id: 6
+                  email: tracey.ramos@reqres.in
+                  first_name: Tracey
+                  last_name: Ramos
+                  avatar: https://reqres.in/img/faces/6-image.jpg
+                support:
+                  url: https://reqres.in/#support-heading
+                  text: To keep ReqRes free, contributions towards server costs are appreciated!
+        '404':
+          description: Not Found
+          headers:
+            Date:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Thu, 29 Sep 2022 09:35:37 GMT
+            Content-Length:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '2'
+            Connection:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: keep-alive
+            X-Powered-By:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Express
+            Access-Control-Allow-Origin:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: '*'
+            Etag:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"
+            Via:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 1.1 vegur
+            Cache-Control:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: max-age=14400
+            CF-Cache-Status:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: MISS
+            Report-To:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    endpoints:
+                    - url: https://a.nel.cloudflare.com/report/v3?s=hq74UhANlxzYtKA9a%2B3sLxvaf2%2B6V7XKlT30ik3SvoizkgT5951CiUIvI8CAE69hYCNlv6t%2Bqe%2B7u4h9h16s%2BTwC1p2rQqK28DmmaZoFQ1dZ87tRUhNwB0XilQ%3D%3D
+                    group: cf-nel
+                    max_age: 604800
+            NEL:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example:
+                    success_fraction: 0
+                    report_to: cf-nel
+                    max_age: 604800
+            Vary:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: Accept-Encoding
+            Server:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: cloudflare
+            CF-RAY:
+              content:
+                text/plain:
+                  schema:
+                    type: string
+                  example: 7523bad45e9724b0-KBP
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                example: {}
+              example: {}
+      deprecated: false
+  /users/23:
+    get:
+      tags:
+      - Misc
+      summary: User not found 404
+      operationId: Usernotfound404
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /unknown/:
+    get:
+      tags:
+      - Misc
+      summary: Get unknown list resource
+      operationId: Getunknownlistresource
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /unknown/23:
+    get:
+      tags:
+      - Misc
+      summary: Single unknown list not found
+      operationId: Singleunknownlistnotfound
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /register/:
+    post:
+      tags:
+      - Misc
+      summary: RegSuccess
+      operationId: RegSuccess
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/RegSuccessRequest'
+              - example:
+                  email: ''
+                  password: ''
+            example:
+              email: ''
+              password: ''
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+  /login/:
+    post:
+      tags:
+      - Misc
+      summary: LoginSuccess
+      operationId: LoginSuccess
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: '#/components/schemas/LoginSuccessRequest'
+              - example:
+                  email: ''
+                  password: ''
+            example:
+              email: ''
+              password: ''
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+components:
+  schemas:
+    Getlistofusers:
+      title: Getlistofusers
+      required:
+      - page
+      - per_page
+      - total
+      - total_pages
+      - data
+      - support
+      type: object
+      properties:
+        page:
+          type: integer
+          format: int32
+        per_page:
+          type: integer
+          format: int32
+        total:
+          type: integer
+          format: int32
+        total_pages:
+          type: integer
+          format: int32
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Datum'
+          description: ''
+        support:
+          allOf:
+          - $ref: '#/components/schemas/Support'
+          - {}
+      example:
+        page: 2
+        per_page: 6
+        total: 12
+        total_pages: 2
+        data:
+        - id: 7
+          email: michael.lawson@reqres.in
+          first_name: Michael
+          last_name: Lawson
+          avatar: https://reqres.in/img/faces/7-image.jpg
+        - id: 8
+          email: lindsay.ferguson@reqres.in
+          first_name: Lindsay
+          last_name: Ferguson
+          avatar: https://reqres.in/img/faces/8-image.jpg
+        - id: 9
+          email: tobias.funke@reqres.in
+          first_name: Tobias
+          last_name: Funke
+          avatar: https://reqres.in/img/faces/9-image.jpg
+        - id: 10
+          email: byron.fields@reqres.in
+          first_name: Byron
+          last_name: Fields
+          avatar: https://reqres.in/img/faces/10-image.jpg
+        - id: 11
+          email: george.edwards@reqres.in
+          first_name: George
+          last_name: Edwards
+          avatar: https://reqres.in/img/faces/11-image.jpg
+        - id: 12
+          email: rachel.howell@reqres.in
+          first_name: Rachel
+          last_name: Howell
+          avatar: https://reqres.in/img/faces/12-image.jpg
+        support:
+          url: https://reqres.in/#support-heading
+          text: To keep ReqRes free, contributions towards server costs are appreciated!
+    Datum:
+      title: Datum
+      required:
+      - id
+      - email
+      - first_name
+      - last_name
+      - avatar
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        avatar:
+          type: string
+      example:
+        id: 7
+        email: michael.lawson@reqres.in
+        first_name: Michael
+        last_name: Lawson
+        avatar: https://reqres.in/img/faces/7-image.jpg
+    Support:
+      title: Support
+      required:
+      - url
+      - text
+      type: object
+      properties:
+        url:
+          type: string
+        text:
+          type: string
+      example:
+        url: https://reqres.in/#support-heading
+        text: To keep ReqRes free, contributions towards server costs are appreciated!
+    Getsinglleuser:
+      title: Getsinglleuser
+      required:
+      - data
+      - support
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/Data'
+          - {}
+        support:
+          allOf:
+          - $ref: '#/components/schemas/Support'
+          - {}
+      example:
+        data:
+          id: 6
+          email: tracey.ramos@reqres.in
+          first_name: Tracey
+          last_name: Ramos
+          avatar: https://reqres.in/img/faces/6-image.jpg
+        support:
+          url: https://reqres.in/#support-heading
+          text: To keep ReqRes free, contributions towards server costs are appreciated!
+    Data:
+      title: Data
+      required:
+      - id
+      - email
+      - first_name
+      - last_name
+      - avatar
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        email:
+          type: string
+        first_name:
+          type: string
+        last_name:
+          type: string
+        avatar:
+          type: string
+      example:
+        id: 6
+        email: tracey.ramos@reqres.in
+        first_name: Tracey
+        last_name: Ramos
+        avatar: https://reqres.in/img/faces/6-image.jpg
+    CreateuserRequest:
+      title: CreateuserRequest
+      required:
+      - name
+      - job
+      type: object
+      properties:
+        name:
+          type: string
+        job:
+          type: string
+      example:
+        name: ''
+        job: ''
+    Createuser:
+      title: Createuser
+      required:
+      - name
+      - job
+      - id
+      - createdAt
+      type: object
+      properties:
+        name:
+          type: string
+        job:
+          type: string
+        id:
+          type: string
+        createdAt:
+          type: string
+      example:
+        name: Valdirr
+        job: QA
+        id: '889'
+        createdAt: 2022-09-29T09:35:50.850Z
+    CreateuserNeg-emptyelRequest:
+      title: CreateuserNeg-emptyelRequest
+      required:
+      - name
+      - job
+      type: object
+      properties:
+        name:
+          type: string
+        job:
+          type: string
+          nullable: true
+      example:
+        name: ''
+        job: null
+    CreateuserNeg-otherdatatypeRequest:
+      title: CreateuserNeg-otherdatatypeRequest
+      required:
+      - name
+      - job
+      type: object
+      properties:
+        name:
+          type: boolean
+        job:
+          type: integer
+          format: int32
+      example:
+        name: true
+        job: 3
+    CreateuserNeg-orderRequest:
+      title: CreateuserNeg-orderRequest
+      required:
+      - job
+      - name
+      type: object
+      properties:
+        job:
+          type: string
+        name:
+          type: string
+      example:
+        job: QA
+        name: Dima
+    CreateuserNeg-deleteattrRequest:
+      title: CreateuserNeg-deleteattrRequest
+      required:
+      - job
+      type: object
+      properties:
+        job:
+          type: string
+      example:
+        job: QA
+    UpdateuserRequest:
+      title: UpdateuserRequest
+      required:
+      - name
+      - job
+      type: object
+      properties:
+        name:
+          type: string
+        job:
+          type: string
+      example:
+        name: ''
+        job: ''
+    UpdateuserbypatchRequest:
+      title: UpdateuserbypatchRequest
+      required:
+      - name
+      - job
+      type: object
+      properties:
+        name:
+          type: string
+        job:
+          type: string
+      example:
+        name: ''
+        job: ''
+    DeleteuserRequest:
+      title: DeleteuserRequest
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+      example:
+        name: ''
+    RegSuccessRequest:
+      title: RegSuccessRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: ''
+        password: ''
+    RegUnsuccessRequest:
+      title: RegUnsuccessRequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: ''
+    LoginSuccessRequest:
+      title: LoginSuccessRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: ''
+        password: ''
+    LoginUnsuccessRequest:
+      title: LoginUnsuccessRequest
+      required:
+      - email
+      type: object
+      properties:
+        email:
+          type: string
+      example:
+        email: ''
+tags:
+- name: Misc
+  description: ''

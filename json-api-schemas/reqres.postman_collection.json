@@ -1,0 +1,1576 @@
+{
+	"info": {
+		"_postman_id": "fcea3cd1-cd5c-4969-905e-038912fb3798",
+		"name": "reqres",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20258337"
+	},
+	"item": [
+		{
+			"name": "Get list of users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// const resourcesSchema = {\r",
+							"//   \"page\": 0,\r",
+							"//   \"per_page\": 0,\r",
+							"//   \"total\": 0,\r",
+							"//   \"total_pages\": 0,\r",
+							"//   \"data\": [\r",
+							"//     {\r",
+							"//       \"id\": 0,\r",
+							"//       \"name\": \"string\",\r",
+							"//       \"year\": 0,\r",
+							"//       \"color\": \"string\",\r",
+							"//       \"pantone_value\": \"string\",\r",
+							"//     }\r",
+							"//   ],\r",
+							"//   \"required\":[\r",
+							"//     \"email\"\r",
+							"//   ]\r",
+							"// }\r",
+							"\r",
+							"var schema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"page\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"per_page\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"total\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"total_pages\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    },\r",
+							"    \"data\": {\r",
+							"      \"type\": \"array\",\r",
+							"      \"items\": [\r",
+							"        {\r",
+							"          \"type\": \"object\",\r",
+							"          \"properties\": {\r",
+							"            \"id\": {\r",
+							"              \"type\": \"integer\"\r",
+							"            },\r",
+							"            \"email\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"first_name\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"last_name\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"avatar\": {\r",
+							"              \"type\": \"string\"\r",
+							"            }\r",
+							"          },\r",
+							"          \"required\": [\r",
+							"            \"id\",\r",
+							"            \"email\",\r",
+							"            \"first_name\",\r",
+							"            \"last_name\",\r",
+							"            \"avatar\"\r",
+							"          ]\r",
+							"        }]\r",
+							"    },\r",
+							"    \"support\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"url\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"text\": {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"url\",\r",
+							"        \"text\"\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"page\",\r",
+							"    \"per_page\",\r",
+							"    \"total\",\r",
+							"    \"total_pages\",\r",
+							"    \"data\",\r",
+							"    \"support\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test('Validate Schema', function(){\r",
+							"    var result=tv4.validateResult(pm.response.json(), schema)\r",
+							"    pm.expect(result.valid).to.be.true\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Validate schema\"), function (){\r",
+							"    pm.response.to.have.jsonSchema(resourcesSchema);\r",
+							"    pm.response.to.be.eql.jsonSchema(resourcesSchema)\r",
+							"    pm.expect(tv4.validate(jsonData,resourcesSchema)).to.be.true\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check body + body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.page).to.eql(2);\r",
+							"    pm.expect(jsonData.per_page).to.eql(6);\r",
+							"    pm.expect(jsonData.total).to.eql(12);\r",
+							"    pm.expect(jsonData.total_pages).to.eql(2);\r",
+							"    pm.expect(jsonData.data[0].id).to.exist\r",
+							"    pm.expect(jsonData.data[0].email).to.exist\r",
+							"    pm.expect(jsonData.data[0].first_name).to.exist\r",
+							"    pm.expect(jsonData.data[0].last_name).to.exist\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}?page=2",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get list of users",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{api}}{{users}}?page=2",
+							"host": [
+								"{{URL}}{{api}}{{users}}"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 09:35:05 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"406-ut0vzoCuidvyMf8arZpMpJ6ZRDw\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "MISS"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=BXKkKxI6lAGc3SgdFOXJxnB36cHjxvDfJc2XlF6PSF%2FUZ18tds8ed7y9q3NoaEsW2efnuSP1VMWZ23lfIoZyQcF93fUrfJJLYyrrshFLFTxCjKIHrwwU%2BJWYWA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "7523ba0b0c7024b0-KBP"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"page\": 2,\n    \"per_page\": 6,\n    \"total\": 12,\n    \"total_pages\": 2,\n    \"data\": [\n        {\n            \"id\": 7,\n            \"email\": \"michael.lawson@reqres.in\",\n            \"first_name\": \"Michael\",\n            \"last_name\": \"Lawson\",\n            \"avatar\": \"https://reqres.in/img/faces/7-image.jpg\"\n        },\n        {\n            \"id\": 8,\n            \"email\": \"lindsay.ferguson@reqres.in\",\n            \"first_name\": \"Lindsay\",\n            \"last_name\": \"Ferguson\",\n            \"avatar\": \"https://reqres.in/img/faces/8-image.jpg\"\n        },\n        {\n            \"id\": 9,\n            \"email\": \"tobias.funke@reqres.in\",\n            \"first_name\": \"Tobias\",\n            \"last_name\": \"Funke\",\n            \"avatar\": \"https://reqres.in/img/faces/9-image.jpg\"\n        },\n        {\n            \"id\": 10,\n            \"email\": \"byron.fields@reqres.in\",\n            \"first_name\": \"Byron\",\n            \"last_name\": \"Fields\",\n            \"avatar\": \"https://reqres.in/img/faces/10-image.jpg\"\n        },\n        {\n            \"id\": 11,\n            \"email\": \"george.edwards@reqres.in\",\n            \"first_name\": \"George\",\n            \"last_name\": \"Edwards\",\n            \"avatar\": \"https://reqres.in/img/faces/11-image.jpg\"\n        },\n        {\n            \"id\": 12,\n            \"email\": \"rachel.howell@reqres.in\",\n            \"first_name\": \"Rachel\",\n            \"last_name\": \"Howell\",\n            \"avatar\": \"https://reqres.in/img/faces/12-image.jpg\"\n        }\n    ],\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get singlle user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const userSchema = {\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"id\": {\r",
+							"          \"type\": \"integer\"  /// changed from int\r",
+							"        },\r",
+							"        // \"id2\": {\r",
+							"        //   \"type\": \"integer\"\r",
+							"        // },  /// added other property\r",
+							"        \"email\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"first_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"last_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"avatar\": {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"id\",\r",
+							"        // \"id2\",      /// added other required\r",
+							"        \"email\",\r",
+							"        \"first_name\",\r",
+							"        \"last_name\",\r",
+							"        \"avatar\"\r",
+							"      ]\r",
+							"    },\r",
+							"    \"support\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"url\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"text\": {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"url\",\r",
+							"        \"text\"\r",
+							"      ]\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"data\",\r",
+							"    \"support\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"pm.test('Schema Validation short', function(){\r",
+							"    var result=tv4.validateResult(pm.response.json(), userSchema)\r",
+							"    pm.expect(result.valid).to.be.true\r",
+							"})\r",
+							"\r",
+							"pm.test('Schema Validation Long', function(){\r",
+							"    var result=tv4.validateResult(pm.response.json(), userSchema)\r",
+							"    if(!result.valid){\r",
+							"        console.log(result)\r",
+							"    }\r",
+							"    pm.expect(result.valid).to.be.true\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Validate schema\"), function (){\r",
+							"    pm.response.to.have.jsonSchema(userSchema);\r",
+							"    pm.response.to.be.eql.jsonSchema(userSchema)\r",
+							"    pm.expect(tv4.validate(pm.response.json(),userSchema)).to.be.true\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check body data\", function () {\r",
+							"    var jsonData = pm.response.json().data;\r",
+							"    pm.expect(jsonData.id).to.eql(6);\r",
+							"    pm.expect(jsonData.email).to.eql(\"tracey.ramos@reqres.in\");\r",
+							"    pm.expect(jsonData.first_name).to.eql(\"Tracey\");\r",
+							"    pm.expect(jsonData.last_name).to.eql(\"Ramos\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}6",
+					"host": [
+						"{{URL}}{{api}}{{users}}6"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get singlle user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{api}}{{users}}6",
+							"host": [
+								"{{URL}}{{api}}{{users}}6"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 09:35:17 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"118-we7xcJocGnljhK3IAnwbs1F3VcQ\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "REVALIDATED"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=jFdGovnDvuNVw6dPQu0C7s5iQlajTmnmjEmOoGoxCWSuBE3XOe6wtlh%2BQ9PjseEXy2ChE1%2FbQ3I7vmsJLNmrH1gyAZxQqyB5vqdaK1Xu5is3ygMdaKBHDL4lEw%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "7523ba53ff8024b0-KBP"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 6,\n        \"email\": \"tracey.ramos@reqres.in\",\n        \"first_name\": \"Tracey\",\n        \"last_name\": \"Ramos\",\n        \"avatar\": \"https://reqres.in/img/faces/6-image.jpg\"\n    },\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				},
+				{
+					"name": "Get singlle user",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}{{api}}{{users}}54",
+							"host": [
+								"{{URL}}{{api}}{{users}}54"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 09:35:37 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "MISS"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=hq74UhANlxzYtKA9a%2B3sLxvaf2%2B6V7XKlT30ik3SvoizkgT5951CiUIvI8CAE69hYCNlv6t%2Bqe%2B7u4h9h16s%2BTwC1p2rQqK28DmmaZoFQ1dZ87tRUhNwB0XilQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "7523bad45e9724b0-KBP"
+						}
+					],
+					"cookie": [],
+					"body": "{}"
+				}
+			]
+		},
+		{
+			"name": "User not found 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body is empty\", function () {\r",
+							"    pm.expect(pm.response.json()).to.be.empty\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}23",
+					"host": [
+						"{{URL}}{{api}}{{users}}23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get unknown list resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check body\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.page).to.eql(1);\r",
+							"    pm.expect(jsonData.per_page).to.eql(6);\r",
+							"    pm.expect(jsonData.total).to.eql(12);\r",
+							"    pm.expect(jsonData.total_pages).to.eql(2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check body data\", function () {\r",
+							"    var jsonDataValues = pm.response.json().data;\r",
+							"    console.log(jsonDataValues[0])\r",
+							"    pm.expect(jsonDataValues[0].name).to.eq('cerulean')\r",
+							"    pm.expect(jsonDataValues[0].id).to.exist\r",
+							"    pm.expect(jsonDataValues[0].year).to.exist\r",
+							"    pm.expect(jsonDataValues[0].color).to.exist\r",
+							"    pm.expect(jsonDataValues[0].pantone_value).to.exist\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{api}}{{unknown}}",
+					"host": [
+						"{{URL}}{{api}}{{unknown}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get unknown single list resource",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Check body data\", function () {\r",
+							"    var jsonDataValues = pm.response.json().data;\r",
+							"    console.log(jsonDataValues)\r",
+							"    pm.expect(jsonDataValues.id).to.eq(2)\r",
+							"    pm.expect(jsonDataValues.name).to.eq('fuchsia rose')\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{api}}{{unknown}}?id=2",
+					"host": [
+						"{{URL}}{{api}}{{unknown}}"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Single unknown list not found",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{api}}{{unknown}}23",
+					"host": [
+						"{{URL}}{{api}}{{unknown}}23"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name is Dima + body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Valdirr\");\r",
+							"    pm.expect(jsonData.id).to.exist\r",
+							"    pm.expect(jsonData.createdAt).to.exist\r",
+							"\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"{{account}}\",\r\n\"job\":\"{{job}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create user",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\":\"{{account}}\",\r\n\"job\":\"{{job}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}{{api}}{{users}}",
+							"host": [
+								"{{URL}}{{api}}{{users}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 09:35:50 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "79"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"4f-YAqky0i3RmYr2sYCqf/MSsxWVtQ\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "DYNAMIC"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=%2FbALHSH4D5b%2FHrLqeV1KUo%2FAFWVoe6Ljwv2mg3h7uh4tbfp%2B3ehfL%2FG4K1kZOLcP%2BepsO3rtJsfdj0v107i2X1p%2FNpFqKrPJJL9Q%2BOE5JLG7bN9wq22T6lPoRQ%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "7523bb264e6924b0-KBP"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"Valdirr\",\n    \"job\": \"QA\",\n    \"id\": \"889\",\n    \"createdAt\": \"2022-09-29T09:35:50.850Z\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create user Neg - empty el",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.exist\r",
+							"    pm.expect(jsonData.createdAt).to.exist\r",
+							"});\r",
+							"\r",
+							"const schema ={\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"job\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"id\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"createdAt\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"name\",\r",
+							"    \"job\",\r",
+							"    \"id\",\r",
+							"    \"createdAt\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"\r",
+							"pm.test('Validate Schema', function(){\r",
+							"    var result=tv4.validateResult(pm.response.json(), schema)\r",
+							"    pm.expect(result.valid).to.be.true\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"\",\r\n\"job\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user Neg - other data type",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.exist\r",
+							"    pm.expect(jsonData.createdAt).to.exist\r",
+							"});\r",
+							"\r",
+							"const schema ={\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"job\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"id\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"createdAt\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"name\",\r",
+							"    \"job\",\r",
+							"    \"id\",\r",
+							"    \"createdAt\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"\r",
+							"pm.test('Validate Schema', function(){\r",
+							"    var result=tv4.validateResult(pm.response.json(), schema)\r",
+							"    pm.expect(result.valid).to.be.true\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": true,\r\n\"job\":3 \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user Neg - order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.exist\r",
+							"    pm.expect(jsonData.createdAt).to.exist\r",
+							"});\r",
+							"\r",
+							"const schema ={\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"job\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"id\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"createdAt\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"name\",\r",
+							"    \"job\",\r",
+							"    \"id\",\r",
+							"    \"createdAt\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"\r",
+							"pm.test('Validate Schema', function(){\r",
+							"    var result=tv4.validateResult(pm.response.json(), schema)\r",
+							"    pm.expect(result.valid).to.be.true\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"job\":\"QA\",\r\n\"name\":\"Dima\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create user Neg - delete attr",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.exist\r",
+							"    pm.expect(jsonData.createdAt).to.exist\r",
+							"});\r",
+							"\r",
+							"const schema ={\r",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",\r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"name\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"job\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"id\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"createdAt\": {\r",
+							"      \"type\": \"string\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"name\",\r",
+							"    \"job\",\r",
+							"    \"id\",\r",
+							"    \"createdAt\"\r",
+							"  ]\r",
+							"}\r",
+							"\r",
+							"\r",
+							"pm.test('Validate Schema', function(){\r",
+							"    var result=tv4.validateResult(pm.response.json(), schema)\r",
+							"    pm.expect(result.valid).to.be.true\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"job\":\"QA\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name is Dima + body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Valdirr\");\r",
+							"    pm.expect(jsonData.updatedAt).to.exist\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"{{account}}\",\r\n\"job\":\"{{job}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}?searchId=6",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					],
+					"query": [
+						{
+							"key": "searchId",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user by patch",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Name is Dima + body structure\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.name).to.eql(\"Valdirr\");\r",
+							"    pm.expect(jsonData.updatedAt).to.exist\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"{{account}}\",\r\n\"job\":\"{{job}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}?{{searchId}}=6",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					],
+					"query": [
+						{
+							"key": "{{searchId}}",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"{{account}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}?searchId=5",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					],
+					"query": [
+						{
+							"key": "searchId",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegSuccess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Token value check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.id).to.exist;\r",
+							"    pm.expect(jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{passForRegister}}\"   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{register}}",
+					"host": [
+						"{{URL}}{{api}}{{register}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "RegUnsuccess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([400,422])\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Error value check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Missing password\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"email\": \"{{email}}\"\r\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{register}}",
+					"host": [
+						"{{URL}}{{api}}{{register}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginSuccess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Token value check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.token).to.eql(\"QpwL5tke4Pnpja7X4\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{passForLogin}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{login}}",
+					"host": [
+						"{{URL}}{{api}}{{login}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LoginUnsuccess",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 200ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Token value check\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.error).to.eql(\"Missing password\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"{{email}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URL}}{{api}}{{login}}",
+					"host": [
+						"{{URL}}{{api}}{{login}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DelayResponse",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Response time is less than 3.5s\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(3500);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URL}}{{api}}{{users}}?delay=3",
+					"host": [
+						"{{URL}}{{api}}{{users}}"
+					],
+					"query": [
+						{
+							"key": "delay",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "https://reqres.in/"
+		},
+		{
+			"key": "api",
+			"value": "api/",
+			"type": "string"
+		},
+		{
+			"key": "users",
+			"value": "users/"
+		},
+		{
+			"key": "login",
+			"value": "login/",
+			"type": "string"
+		},
+		{
+			"key": "register",
+			"value": "register/",
+			"type": "string"
+		},
+		{
+			"key": "unknown",
+			"value": "unknown/",
+			"type": "string"
+		},
+		{
+			"key": "searchPage",
+			"value": "page",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "searchId",
+			"value": "",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "account",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "job",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "email",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "passForRegister",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "passForLogin",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
